@@ -8,14 +8,13 @@ import CalendarMonth from "./calendar-month";
 function buildMonths () {
     const weather = weatherData.data;
     const months = []
-    let i = 0, tempData = [];
+    let i = 0;
 
     while (i < 12) {
-        tempData = weather;
         const daysToDate = moment(2022).month(i-1).endOf('month').diff(moment(2022).startOf('year'), 'days');
         const sliceStart = daysToDate === 0 ? 0 : daysToDate + 1 ;
         const sliceEnd = sliceStart + moment().month(i).daysInMonth();
-        months[i] = tempData.slice(sliceStart, sliceEnd);
+        months[i] = weather.slice(sliceStart, sliceEnd);
         i++;
     }
 
