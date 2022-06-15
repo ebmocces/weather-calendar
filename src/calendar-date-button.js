@@ -1,28 +1,17 @@
 import React, {useState} from "react";
 
 export default function DateButton(props) {
-    const [isSelected, setIsSelected] = useState(Boolean);
+    const selectedClass = props.selected ? 'selected' : '';
+    const dimmed = props.dimmed;
 
-    const selectedClass = isSelected ? 'selected' : '';
-    
-    const classes = `day ${props.weather} ${selectedClass}`;
-
-    function dateSelect(e) {
-        e.preventDefault();
-        setIsSelected(true);
-    }
-
-    function dateBlur(e) {
-        e.preventDefault();
-        setIsSelected(false);
-    }
+    const classes = `day ${props.weather} ${selectedClass} ${dimmed !== props.weather ? 'dimmed' : ''}`;
 
     return (
         <div className={classes}>
             <button
-                onBlur={dateBlur}
-                onClick={dateSelect}
+                onClick={props.onClick}
                 value={`${props.day.month}-${props.day.day}`}
+                onMouseEnter={() => {props.onHover(props.weather)}}
             />
         </div>
     )

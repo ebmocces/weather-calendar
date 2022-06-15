@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import moment from "moment";
 
 import weatherData from './data.json';
@@ -22,12 +22,35 @@ function buildMonths () {
 }
 
 export default function Calendar(props) {
-    const months = buildMonths(props.year);
-    
+    const [selectedDate, setSelectedDate] = useState(null);
+    const [dimmedWeather, setDimmedWeather] = useState(null);
+    const months = buildMonths();
+
+    function dateSelect(e) {
+        e.preventDefault();
+        setSelectedDate(e.target.value);
+    }
+
+    function dateHover(weather) {
+        setDimmedWeather(weather);
+    }
+
     return (
         <div className="calendar">
+            {/* <div className="selected-date-details">
+                <span className="icon rainy"></span>
+                <span className="selected-date">Wednesday 4th February</span>
+                <span className="weather">Rainy</span>
+            </div> */}
             {months.map((item,index)=>{
-                return (<CalendarMonth key={index} month={item} />);
+                return (<CalendarMonth
+                            key={index}
+                            month={item}
+                            selectedDate={selectedDate}
+                            weatherToDim={dimmedWeather}
+                            onClick={dateSelect}
+                            onHover={dateHover}
+                        />);
             })}
         </div>
     );

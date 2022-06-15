@@ -5,13 +5,14 @@ import DateButton from "./calendar-date-button";
 
 export default function CalendarMonth(props) {
     const monthData = props.month;
+    const selectedDate = props.selectedDate;
 
     const currentMonthName = moment().month(monthData[0].month-1).format("MMMM");
     const temp = moment().month(monthData[0].month-1).startOf("month").startOf("week");
     const startOfMonth = moment().month(monthData[0].month-1).startOf("month");
     const daysBuffer = temp.diff(startOfMonth, 'days') * -1;
 
-    console.log(daysBuffer);
+    let selected = false;
 
     return (
         <div className="calendar-month">
@@ -27,12 +28,21 @@ export default function CalendarMonth(props) {
             </div>
             <div className="calendar-month-dates">
                 <div className={`buffer-${daysBuffer}`} />
-                {monthData.map((day) => (
-                    <DateButton 
-                        day={day}
-                        weather={day.weather}
-                    />
-                ))}
+                {monthData.map((day, index) => {
+                    selected = selectedDate === (`${day.month}-${day.day}`);
+                    
+                    return (
+                        <DateButton 
+                            key={index}
+                            day={day}
+                            weather={day.weather}
+                            dimmed={props.weatherToDim}
+                            selected={selected}
+                            onClick={props.onClick}
+                            onHover={props.onHover}
+                        />
+                    )
+                })}
             </div>
         </div>
     )

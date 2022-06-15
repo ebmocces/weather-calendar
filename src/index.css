@@ -12,7 +12,27 @@ body {
     flex-wrap: wrap;
 }
 
+.selected-date-details {
+    background: #212121;
+    color: #fff;
+}
+
+.selected-date-details .icon {
+    background-color: #fff;
+    background-position: 50%;
+    background-size: 100%;
+    display: inline-block;
+    height: 64px;
+    width: 64px;
+}
+
+.selected-date-details .icon.rainy {
+    background-image: url('./rain.png');
+}
+
 .calendar-month {
+    display: flex;
+    flex-direction: column;
     padding-right: 0.5em;
     width: 324px;
 }
@@ -34,6 +54,10 @@ body {
     box-sizing: border-box;
     height:44px;
     width: calc(100% / 7);
+}
+
+.day.dimmed {
+    opacity: 0.5;
 }
 
 .buffer-1 {
