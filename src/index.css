@@ -12,15 +12,18 @@ body {
     flex-wrap: wrap;
 }
 
-.selected-date-details {
+.selected-date-display {
     background: #212121;
     color: #fff;
+    min-height: 4em;
+    padding: 2em;
 }
 
-.selected-date-details .icon {
+.selected-date-display .icon {
     background-color: #fff;
     background-position: 50%;
     background-size: 100%;
+    border: 1px solid #212121;
     display: inline-block;
     height: 64px;
     width: 64px;
@@ -49,6 +52,49 @@ body {
     width: 44px;
 }
 
+.buffer-1 {
+    display: inline-block;
+    box-sizing: border-box;
+    height:44px;
+    width: calc(100% / 7);
+}
+
+.buffer-2 {
+    display: inline-block;
+    box-sizing: border-box;
+    height:44px;
+    width: calc((100% / 7)*2);
+}
+
+.buffer-3 {
+    display: inline-block;
+    box-sizing: border-box;
+    height:44px;
+    width: calc((100% / 7)*3);
+}
+
+.buffer-4 {
+    display: inline-block;
+    box-sizing: border-box;
+    height:44px;
+    width: calc((100% / 7)*4);
+}
+
+.buffer-5 {
+    display: inline-block;
+    box-sizing: border-box;
+    height:44px;
+    width: calc((100% / 7)*5);
+}
+
+.buffer-6 {
+    display: inline-block;
+    box-sizing: border-box;
+    height:44px;
+    width: calc((100% / 7)*6);
+}
+
+
 .day {
     display: inline-block;
     box-sizing: border-box;
@@ -59,44 +105,6 @@ body {
 .day.dimmed {
     opacity: 0.5;
 }
-
-.buffer-1 {
-    display: inline-block;
-    box-sizing: border-box;
-    height:44px;
-    width: calc(100% / 7);
-}
-.buffer-2 {
-    display: inline-block;
-    box-sizing: border-box;
-    height:44px;
-    width: calc((100% / 7)*2);
-}
-.buffer-3 {
-    display: inline-block;
-    box-sizing: border-box;
-    height:44px;
-    width: calc((100% / 7)*3);
-}
-.buffer-4 {
-    display: inline-block;
-    box-sizing: border-box;
-    height:44px;
-    width: calc((100% / 7)*4);
-}
-.buffer-5 {
-    display: inline-block;
-    box-sizing: border-box;
-    height:44px;
-    width: calc((100% / 7)*5);
-}
-.buffer-6 {
-    display: inline-block;
-    box-sizing: border-box;
-    height:44px;
-    width: calc((100% / 7)*6);
-}
-
 
 .day button {
     background: #fff;

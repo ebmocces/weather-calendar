@@ -1,9 +1,10 @@
-import React, { useState } from "react";
 import moment from "moment";
+import React, { useState } from "react";
 
 import weatherData from './data.json';
 
 import CalendarMonth from "./calendar-month";
+import SelectedDateDisplay from "./calendar-selected-date";
 
 function buildMonths () {
     const weather = weatherData.data;
@@ -22,36 +23,42 @@ function buildMonths () {
 }
 
 export default function Calendar(props) {
-    const [selectedDate, setSelectedDate] = useState(null);
+    const [selectedDate, setSelectedDate] = useState(moment());
+    const [selectedWeather, setSelectedWeather] = useState(null);
     const [dimmedWeather, setDimmedWeather] = useState(null);
     const months = buildMonths();
 
     function dateSelect(e) {
+        const selectedDatesWeather = e.target.parentElement.getAttribute('data-weather');
+        const selectedDateObject = moment(`2022-${e.target.value}`);
+
         e.preventDefault();
-        setSelectedDate(e.target.value);
+        
+        setSelectedDate(selectedDateObject);
+        setSelectedWeather(selectedDatesWeather);
     }
 
     function dateHover(weather) {
-        setDimmedWeather(weather);
+        weather !== ''
+            ? setDimmedWeather(weather)
+            : setDimmedWeather(null);
     }
 
     return (
-        <div className="calendar">
-            {/* <div className="selected-date-details">
-                <span className="icon rainy"></span>
-                <span className="selected-date">Wednesday 4th February</span>
-                <span className="weather">Rainy</span>
-            </div> */}
-            {months.map((item,index)=>{
-                return (<CalendarMonth
-                            key={index}
-                            month={item}
-                            selectedDate={selectedDate}
-                            weatherToDim={dimmedWeather}
-                            onClick={dateSelect}
-                            onHover={dateHover}
-                        />);
-            })}
+        <div>
+            <SelectedDateDisplay selectedDate={selectedDate} selectedWeather={selectedWeather} />
+            <div className="calendar">
+                {months.map((item,index)=>{
+                    return (<CalendarMonth
+                                key={index}
+                                month={item}
+                                selectedDate={selectedDate}
+                                weatherToDim={dimmedWeather}
+                                onClick={dateSelect}
+                                onHover={dateHover}
+                            />);
+                })}
+            </div>
         </div>
     );
 }
